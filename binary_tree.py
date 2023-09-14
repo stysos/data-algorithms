@@ -8,6 +8,9 @@ class Node:
         self.left = None
         self.right = None
         
+    def __repr__(self):
+        return f'Node({self.value})'
+        
     def printtree(self):
         print(self.data)
         
@@ -20,7 +23,7 @@ class Tree:
         self.root = root
         
     def getroot(self):
-        return self.head
+        return self.root
     
     def add(self, value):
         if self.root is None:
@@ -39,6 +42,14 @@ class Tree:
                 self._add(value, node.right)
             else:
                 node.right = Node(value)
+                
+    def walk(self, curr, path):
+        if curr is None:
+            return path
+        
+        self.walk(curr.left, path)
+        path.append(curr.value)
+        self.walk(curr.right, path)
     
     def printtree(self):
         if self.root is None:
@@ -51,14 +62,18 @@ class Tree:
         self._printtree(node.left)
         print(str(node.value) + ' ')
         self._printtree(node.right) 
-    
+        
 
 root_node = Node(15)
+root_node.left = Node(1)
+root_node.right = Node(6)
 tree = Tree(root_node)
 
 tree.add(50)
+path = []
+tree.walk(tree.root, path)
+print(path)
 
-tree.printtree()
 
 
 

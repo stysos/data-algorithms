@@ -42,14 +42,19 @@ class Tree:
                 self._add(value, node.right)
             else:
                 node.right = Node(value)
+    def walk(self, path):
+        if self.root is None:
+            return path
+        else:
+            self._walk(self.root, path)      
                 
-    def walk(self, curr, path) -> None:
+    def _walk(self, curr, path) -> None:
         if curr is None:
             return 
         
-        self.walk(curr.left, path)
+        self._walk(curr.left, path)
         path.append(curr.value)
-        self.walk(curr.right, path)
+        self._walk(curr.right, path)
     
     def printtree(self):
         if self.root is None:
@@ -71,7 +76,7 @@ tree = Tree(root_node)
 
 tree.add(50)
 path = []
-tree.walk(tree.root, path)
+tree.walk(path)
 print(path)
 
 

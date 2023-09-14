@@ -41,15 +41,17 @@ class Tree:
                 node.right = Node(value)
     
     def printtree(self):
-        if self.root is not None:
-            self._printtree(self.root)
+        if self.root is None:
+            return 
+        self._printtree(self.root)
         
     def _printtree(self, node):
-        if node is not None:
-            self._printtree(node.left)
-            print(str(node.value) + ' ')
-            self._printtree(node.right) 
-        
+        if node is None:
+            return
+        self._printtree(node.left)
+        print(str(node.value) + ' ')
+        self._printtree(node.right) 
+    
 
 root_node = Node(15)
 tree = Tree(root_node)

@@ -43,9 +43,9 @@ class Tree:
             else:
                 node.right = Node(value)
                 
-    def walk(self, curr, path):
+    def walk(self, curr, path) -> None:
         if curr is None:
-            return path
+            return 
         
         self.walk(curr.left, path)
         path.append(curr.value)

@@ -16,6 +16,12 @@ class CustomList:
             raise IndexError('CustomList index out of range')
         return self.items[index]
     
+    def __setitem__(self, index, value):
+        if index < 0 or index >= self.count:
+            raise IndexError('CustomList index out of range')
+        self.items[index] = value
+    
+    
     def __delitem__(self, index):
         if index < 0 or index >= self.count:
             raise IndexError('CustomList index out of range')

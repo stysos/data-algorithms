@@ -1,4 +1,7 @@
 class BreadthFirstSearch:
+    """
+    Shortest path always
+    """
     def __init__(self, data: dict):
         self.data = data
         self.queue = list()
@@ -35,10 +38,16 @@ class BreadthFirstSearch:
 
 
 class DepthFirstSearch:
+    """
+    Topological sorting, cycle detection or connectivity
+    
+    Can show connectivity in paths between each node (returns dict[value] = connected nodes) 
+    """
     def __init__(self, data: dict):
         self.data = data
-        self.visisted = list()
+        self.visited = list()
         self.queue = list()
+        self.paths = {node: [] for node in data}
 
     def add_to_queue(self, value):
         self.queue.append(value)
@@ -47,8 +56,18 @@ class DepthFirstSearch:
         value = self.queue.pop()
         self.visited.append(value)
 
-    def run(self):
-        pass
+    def run(self, start, destination):
+        self.dfs(start, destination)
+        print(self.paths)
+        
+    def dfs(self, current_node, destination):
+        if current_node not in self.visited:
+            self.visited.append(current_node)
+            
+            for neighbour in self.data[current_node]:
+                if neighbour not in self.visited:
+                    self.paths[neighbour] = self.paths[current_node] + [current_node]
+                    self.dfs(neighbour, destination)
 
 
 if __name__ == "__main__":
@@ -70,3 +89,9 @@ if __name__ == "__main__":
     destination_node = "G"
 
     bfs.run(start_node, destination_node)
+    
+    
+    dfs = DepthFirstSearch(graph)
+    
+    dfs.run(start_node, destination_node)
+    

@@ -21,7 +21,7 @@ class Solution:
             
             for string in strs[1:]:
                 if string[i] == char:
-                    print("passing")
+                    print("passing")source 
                     pass
                 else:
                     return substring
